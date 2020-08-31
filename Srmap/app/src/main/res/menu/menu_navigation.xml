@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/ic_home"
+
+        />
+
+    <item android:id="@+id/collaborate"
+        android:title="Collaborate"
+        android:iconTint="@color/colorPrimary"
+        android:icon="@drawable/ic_collaborate"
+        />
+    <item android:id="@+id/srm"
+        android:title="----"
+        android:iconTint="@color/colorPrimary"
+        android:icon="@drawable/ic_srm"/>
+    <item android:id="@+id/vr"
+        android:title="VR"
+        android:iconTint="@color/colorPrimary"
+        android:icon="@drawable/ic_vr"/>
+    <item android:id="@+id/profile"
+        android:title="Profile"
+        android:iconTint="@color/colorPrimary"
+        android:icon="@drawable/ic_user"/>
+
+
+
+
+
+
+</menu>

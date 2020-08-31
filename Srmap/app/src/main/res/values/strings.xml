@@ -1,0 +1,123 @@
+<resources>
+    <string name="app_name">Srmap</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="url" />
+
+    // collaborate
+
+
+    -<string-array name="year">
+
+    <item>second_year</item>
+
+    <item>third_year</item>
+
+</string-array>
+
+
+    -<string-array name="course">
+
+    <item>computer_science</item>
+
+    <item>civil</item>
+
+    <item>electrical_electronics</item>
+
+    <item>electronics_communication</item>
+
+    <item>mechanical</item>
+
+</string-array>
+
+
+    -<string-array name="computer_science3">
+
+    <item>cse01</item>
+
+    <item>cse02</item>
+
+    <item>cse03</item>
+
+    <item>cse04</item>
+
+    <item>cse05</item>
+
+    <item>cse06</item>
+
+    <item>cse07</item>
+
+    <item>cse08</item>
+
+    <item>cse09</item>
+
+    <item>cse10</item>
+
+</string-array>
+
+
+    -<string-array name="computer_science2">
+
+    <item>cse01</item>
+
+    <item>cse02</item>
+
+    <item>cse03</item>
+
+    <item>cse04</item>
+
+    <item>cse05</item>
+
+    <item>cse06</item>
+
+    <item>cse07</item>
+
+    <item>cse08</item>
+
+</string-array>
+
+
+    -<string-array name="electronics_communication3">
+
+    <item>ece01</item>
+
+    <item>ece02</item>
+
+    <item>ece03</item>
+
+    <item>ece04</item>
+
+</string-array>
+
+
+    -<string-array name="electronics_communication2">
+
+    <item>ece01</item>
+
+    <item>ece02</item>
+
+</string-array>
+
+
+    -<string-array name="civil">
+
+    <item>civil1</item>
+
+</string-array>
+
+
+    -<string-array name="mechanical">
+
+    <item>mechanical1</item>
+
+</string-array>
+
+
+    -<string-array name="electrical_electronics">
+
+    <item>electrical1</item>
+
+</string-array>
+
+
+</resources>

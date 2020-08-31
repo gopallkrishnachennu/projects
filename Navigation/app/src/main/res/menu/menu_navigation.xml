@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/ic_home">
+
+    </item>
+
+    <item android:id="@+id/collaborate"
+        android:title="Collaborate"
+        android:icon="@drawable/ic_graduate">
+
+    </item>
+    <item android:id="@+id/srm"
+        android:title="SRM"
+        android:icon="@drawable/ic_srmblck">
+
+    </item>
+    <item android:id="@+id/vr"
+        android:title="VR"
+        android:icon="@drawable/ic_vr">
+
+    </item>
+    <item android:id="@+id/user"
+        android:title="User"
+        android:icon="@drawable/ic_user">
+
+    </item>
+
+
+</menu>

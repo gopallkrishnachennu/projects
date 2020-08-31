@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dashboard.Profile">
+    //Action bar
+    <RelativeLayout
+        android:id="@+id/tollbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/dashboard"
+        android:orientation="horizontal">
+
+        <ImageView
+
+            android:layout_width="25dp"
+            android:layout_height="match_parent"
+            android:id="@+id/signout"
+            android:src="@drawable/ic_signout"
+            android:elevation="2dp"
+            android:layout_marginEnd="20dp"
+            android:layout_alignParentRight="true"
+            />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_back_button"
+            android:layout_marginStart="10dp"
+            android:elevation="10dp"
+            android:layout_alignParentLeft="true"/>
+    </RelativeLayout>
+
+    //image
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:layout_marginBottom="100dp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+
+                <LinearLayout
+                    android:id="@+id/profilelayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="50dp"
+                    android:elevation="8dp"
+                    >
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profileimage"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/fogetpassword"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="18dp"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="#FF000000"/>
+                    <TextView
+                        android:id="@+id/profilename"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Gopala Krishna"
+                        android:textSize="24sp"
+                        android:textColor="#000000"
+                        android:textAlignment="center"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/verified"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Verified  ✔"
+                            android:textSize="15sp"
+                            android:textColor="#000000"
+                            android:textAlignment="center"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="◌ Profile"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_marginLeft="15dp"
+                        />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="First name"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/colorAccent"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        >
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/profilefname"
+                            android:inputType="textPersonName"
+                            android:padding="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Last name"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/colorAccent"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        >
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/profilelname"
+                            android:inputType="textPersonName"
+                            android:padding="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="SRM Email"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/colorAccent"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        >
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/profilemail"
+                            android:inputType="textPersonName"
+                            android:padding="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Phone number"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/colorAccent"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        >
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/profilenumber"
+                            android:inputType="textPersonName"
+                            android:padding="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Birthday"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/colorAccent"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        >
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/profilebirthaday"
+                            android:inputType="textPersonName"
+                            android:padding="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Gender"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/colorAccent"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        >
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/profilegender"
+                            android:inputType="textPersonName"
+                            android:padding="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:id="@+id/loginsignbt"
+                        android:text="Save"
+                        android:textSize="25dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_margin="20dp"
+                        android:gravity="center"
+                        />
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+
+
+
+
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cnb_menuResource="@menu/menu_navigation"
+        android:layout_alignParentBottom="true"
+        android:background="@color/dashboard"
+        app:cnb_unselectedColor="@color/colorPrimary"
+        app:cnb_radius="8dp"
+        app:cnb_orientationMode="horizontal"
+        android:layout_margin="15dp"
+        android:elevation="8dp"
+        />
+
+</RelativeLayout>
