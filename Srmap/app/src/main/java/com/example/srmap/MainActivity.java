@@ -1,5 +1,6 @@
 package com.example.srmap;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,15 +11,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.srmap.dashboard.Srm;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     private static int SPLASH_TIME_OUT=4000;
     Handler handler;
     Runnable runnable;
     ImageView imageView;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +36,13 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent =new Intent(MainActivity.this, Login.class);
-                startActivity(intent);
-                finish();
+
+                    Intent intent =new Intent(MainActivity.this, Login.class);
+                    startActivity(intent);
+                    overridePendingTransition(0,0);
+                    finish();
+
+
             }
         },4000);
 
@@ -42,4 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 }

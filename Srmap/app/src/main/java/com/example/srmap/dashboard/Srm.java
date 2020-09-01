@@ -5,18 +5,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.srmap.R;
+import com.example.srmap.dashboard.Adapters.Myadapter_collaborate;
 import com.example.srmap.dashboard.Adapters.Myadapter_srm;
+import com.example.srmap.dashboard.Helperclasses.User_collaborate;
 import com.example.srmap.dashboard.Helperclasses.Usersrm;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,19 +30,30 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Srm extends AppCompatActivity {
     ImageView imageView;
-    TextView marquee;
+    TextView marquee,boarding,classboarding;
 
     ChipNavigationBar chipNavigationBar;
     List<Usersrm> list;
     Context ct;
     ListView listView;
+    List<User_collaborate> user_collaborates;
     RelativeLayout assignmentcard,modelpapercard,notescard,gpacalculatorcard;
     LinearLayout  nexttechlab,ennovablab,acmlab,hackathonlab,admin,student,edx,ecloud,parent,lear,cdc,ccc,professor;
+    // onboarding
+    public static final  String SHARED_PRE="d";
+    public  static final String TEXT="s";
+    String presenttime;
+
+
+
+
     //.......proffesor list..........
 
     //......official sites..........
@@ -71,6 +87,12 @@ public class Srm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_srm);
+        // boarding
+        boarding=findViewById(R.id.onboardingtv);
+        classboarding=findViewById(R.id.onboardingclasstv);
+        user_collaborates=new ArrayList<>();
+
+
         //.......firebase....
         firebaseDatabase=FirebaseDatabase.getInstance();
         databaseReference=firebaseDatabase.getReference();
@@ -111,10 +133,99 @@ public class Srm extends AppCompatActivity {
         recyclerview();
         navigate();
         more();
+        boradingpanel();
 
 
     }
 
+    private void boradingpanel() {
+        String day="";
+
+        SharedPreferences sharedPreferences=getSharedPreferences(SHARED_PRE,MODE_PRIVATE);
+        String sptext=sharedPreferences.getString(TEXT,"");
+        final Calendar ca=Calendar.getInstance();
+
+        int dayofWeek=ca.get(Calendar.DAY_OF_WEEK);
+        if (dayofWeek==Calendar.SUNDAY)day="monday";
+        if(dayofWeek==Calendar.MONDAY)day="monday";
+        if(dayofWeek==Calendar.TUESDAY)day="tuesday";
+        if(dayofWeek==Calendar.WEDNESDAY)day="wednesday";
+        if(dayofWeek==Calendar.THURSDAY)day="thursady";
+        if(dayofWeek==Calendar.FRIDAY)day="friday";
+        if(dayofWeek==Calendar.SATURDAY)day="saturday";
+
+        sptext=sptext+day;
+        boarding.setText(sptext);
+        firebaseDatabase.getReference().child(sptext).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                timing();
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+
+
+                    User_collaborate user_collaborate=dataSnapshot.getValue(User_collaborate.class);
+                    Long shour= Long.valueOf(user_collaborate.getTime().substring(0,2));
+                    Long smin=Long.valueOf(user_collaborate.getTime().substring(3,5));
+                    Long ehour=Long.valueOf(user_collaborate.getTime().substring(6,8));
+                    Long emin=Long.valueOf(user_collaborate.getTime().substring(9,11));
+
+                    Long pshh= Long.valueOf(presenttime.substring(0,2));
+                    Long psmm= Long.valueOf(presenttime.substring(3,5));
+                    Long time=pshh*60+psmm;
+
+
+                    Long start=shour*60+smin;
+                    Long end=ehour*60+emin;
+
+                   String ampm=presenttime.substring(8,10);
+                   Log.i("am",ampm);
+
+                    if(pshh<9 && ampm.equals("AM" ) ){
+
+                        classboarding.setText("Gd mng");
+
+                    }
+                    if (pshh>6 && ampm.equals("PM")){
+                        classboarding.setText("Gd eve");
+                    }
+
+                   if (time>=start && time<=end){
+                        classboarding.setText(user_collaborate.getCourse()+user_collaborate.getTime());
+
+                    }
+
+
+
+
+            }
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                
+
+            }
+        });
+
+    }
+
+
+
+    private void timing() {
+        Calendar calendar=Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("hh:mm:ssa");
+        presenttime=simpleDateFormat.format(calendar.getTime());
+        //classboarding.setText(presenttime);
+        boradingpanel();
+
+
+
+
+    }
 
 
     private void prof() {

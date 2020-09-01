@@ -11,11 +11,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.srmap.R;
@@ -343,4 +346,28 @@ public class Collaborate extends AppCompatActivity {
             }
         });
     }
+
+    public void timetablenotification(View view) {
+        AlertDialog.Builder alert= new AlertDialog.Builder(Collaborate.this);
+        View view1= LayoutInflater.from(Collaborate.this).inflate(R.layout.customdialog_timetable, null);
+        TextView notice=view1.findViewById(R.id.ttnotivetv);
+        TextView desc=view1.findViewById(R.id.ttdesctv);
+        TextView ok=view1.findViewById(R.id.ttnok);
+
+        alert.setView(view1);
+        final AlertDialog alertDialog=alert.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.show();
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             alertDialog.dismiss();
+
+            }
+        });
+
+    }
+
+
 }

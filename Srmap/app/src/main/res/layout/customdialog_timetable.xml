@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/ttalert"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="355dp"
+    android:layout_height="230dp"
+    android:orientation="vertical"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical">
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="50dp">
+               <TextView
+                   android:id="@+id/ttnotivetv"
+                   android:gravity="center"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:text="Notice ⚠️"
+                   android:textStyle="bold"
+                   android:textColor="#E41E1E"
+                   android:textSize="18sp"/>
+
+           </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+                <TextView
+                    android:id="@+id/ttdesctv"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="If today is *Sunday then it will show
+                    The next day time table...️"
+                    android:textStyle="normal"
+                    android:maxLines="3"
+                    android:textColor="#323030"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/ttnok"
+                    android:gravity="center"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:text="Okay"
+                    android:textStyle="bold"
+                    android:textColor="#F9FAF9"
+                    android:background="@drawable/shape"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+</LinearLayout>

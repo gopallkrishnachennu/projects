@@ -116,6 +116,7 @@ public class Login extends AppCompatActivity  implements FirebaseAuth.AuthStateL
                             Intent intent=new Intent(Login.this, Srm.class);
                             String loginemail =username.getText().toString().trim();
                             intent.putExtra("email",loginemail);
+                            overridePendingTransition(0,0);
                             startActivity(intent);
 
 
@@ -162,6 +163,7 @@ public class Login extends AppCompatActivity  implements FirebaseAuth.AuthStateL
     public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
         if (firebaseAuth.getCurrentUser()!=null && firebaseAuth.getCurrentUser().isEmailVerified() ){
             Intent intent=new Intent(getApplicationContext(),Srm.class);
+            overridePendingTransition(0,0);
             startActivity(intent);
         }
     }
