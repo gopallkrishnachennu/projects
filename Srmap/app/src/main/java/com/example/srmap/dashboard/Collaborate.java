@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.srmap.R;
 import com.example.srmap.dashboard.Adapters.Myadapter_collaborate;
 import com.example.srmap.dashboard.Helperclasses.User_collaborate;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,6 +43,16 @@ public class Collaborate extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference reference;
     List<User_collaborate> list;
+    //collaborete changes
+    //section
+    ArrayAdapter<String> arrayAdapter;
+    ArrayList<String> arrayList;
+
+    //section
+    ArrayAdapter<String> sectionarrayadapter;
+    ArrayList<String> sectionarraylist;
+
+
     String course,day="",section,total,year;
     int hours,minutes;
    Spinner dy,dc,ds;
@@ -71,7 +82,7 @@ public class Collaborate extends AppCompatActivity {
         database=FirebaseDatabase.getInstance();
         reference=database.getReference();
         r=findViewById(R.id.recycler);
-        b=findViewById(R.id.liv);
+
 
 
         loaddata();
@@ -81,7 +92,7 @@ public class Collaborate extends AppCompatActivity {
         if(dayofWeek==Calendar.MONDAY)day="monday";
         if(dayofWeek==Calendar.TUESDAY)day="tuesday";
         if(dayofWeek==Calendar.WEDNESDAY)day="wednesday";
-        if(dayofWeek==Calendar.THURSDAY)day="thursady";
+        if(dayofWeek==Calendar.THURSDAY)day="thursday";
         if(dayofWeek==Calendar.FRIDAY)day="friday";
         if(dayofWeek==Calendar.SATURDAY)day="saturday";
         if (dayofWeek==Calendar.SUNDAY)day="monday";
@@ -151,7 +162,7 @@ public class Collaborate extends AppCompatActivity {
         if(dayofWeek==Calendar.MONDAY)day="monday";
         if(dayofWeek==Calendar.TUESDAY)day="tuesday";
         if(dayofWeek==Calendar.WEDNESDAY)day="wednesday";
-        if(dayofWeek==Calendar.THURSDAY)day="thursady";
+        if(dayofWeek==Calendar.THURSDAY)day="thursday";
         if(dayofWeek==Calendar.FRIDAY)day="friday";
         if(dayofWeek==Calendar.SATURDAY)day="saturday";
 
@@ -206,86 +217,40 @@ public class Collaborate extends AppCompatActivity {
         dc=(Spinner) v.findViewById(R.id.s);
         ds=(Spinner) v.findViewById(R.id.c);
         builder.setTitle("Collaberate");
-        ArrayAdapter<CharSequence> course_data = ArrayAdapter.createFromResource(this, R.array.year, android.R.layout.simple_spinner_item);
+
+        ArrayList<String> stringArrayList=new ArrayList<>();
+        stringArrayList.add("first_year");
+        stringArrayList.add("second_year");
+        stringArrayList.add("third_year");
+        stringArrayList.add("fourth_year");
+      ArrayAdapter<String> course_data =new ArrayAdapter<>(Collaborate.this,android.R.layout.simple_spinner_dropdown_item,stringArrayList);
+
+
         dy.setAdapter(course_data);
         dy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i) {
-                    case 0:
-                        ArrayAdapter<CharSequence> section_data1 = ArrayAdapter.createFromResource(Collaborate.this, R.array.course, android.R.layout.simple_spinner_item);
-                        dc.setAdapter(section_data1);
-                        dc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                switch(i)
-                                {
-                                    case 0:
-                                        ArrayAdapter<CharSequence> arr=ArrayAdapter.createFromResource(Collaborate.this,R.array.computer_science2,android.R.layout.simple_spinner_item);
-                                        ds.setAdapter(arr);
-                                        break;
-                                    case 1:
-                                        ArrayAdapter<CharSequence> arr1=ArrayAdapter.createFromResource(Collaborate.this,R.array.civil,android.R.layout.simple_spinner_item);
-                                        ds.setAdapter(arr1);
-                                        break;
-                                    case 2:
-                                        ArrayAdapter<CharSequence> arr2=ArrayAdapter.createFromResource(Collaborate.this,R.array.electrical_electronics,android.R.layout.simple_spinner_item);
-                                        ds.setAdapter(arr2);
-                                        break;
-                                    case 3:
-                                        ArrayAdapter<CharSequence> arr3=ArrayAdapter.createFromResource(Collaborate.this,R.array.electronics_communication2,android.R.layout.simple_spinner_item);
-                                        ds.setAdapter(arr3);
-                                        break;
-                                    case 4:
-                                        ArrayAdapter<CharSequence> arr4=ArrayAdapter.createFromResource(Collaborate.this,R.array.mechanical,android.R.layout.simple_spinner_item);
-                                        ds.setAdapter(arr4);
-                                }
-                            }
+                arrayList=new ArrayList<>();
+                arrayAdapter=new ArrayAdapter<>(Collaborate.this,android.R.layout.simple_spinner_dropdown_item,arrayList);
+               database.getReference(dy.getSelectedItem().toString()).addValueEventListener(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                            @Override
-                            public void onNothingSelected(AdapterView<?> adapterView) {
 
-                            }
-                        });
-                        break;
-                    case 1:
-                        ArrayAdapter<CharSequence> section_data = ArrayAdapter.createFromResource(Collaborate.this, R.array.course, android.R.layout.simple_spinner_item);
-                        dc.setAdapter(section_data);
-                        dc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                switch(i)
-                                {
-                                    case 0:
-                                        ArrayAdapter<CharSequence> arr=ArrayAdapter.createFromResource(Collaborate.this,R.array.computer_science3,android.R.layout.simple_spinner_item);
-                                        ds.setAdapter(arr);
-                                        break;
-                                    case 1:
-                                        ArrayAdapter<CharSequence> arr1=ArrayAdapter.createFromResource(Collaborate.this,R.array.civil,android.R.layout.simple_spinner_item);
-                                        ds.setAdapter(arr1);
-                                        break;
-                                    case 2:
-                                        ArrayAdapter<CharSequence> arr2=ArrayAdapter.createFromResource(Collaborate.this,R.array.electrical_electronics,android.R.layout.simple_spinner_item);
-                                        ds.setAdapter(arr2);
-                                        break;
-                                    case 3:
-                                        ArrayAdapter<CharSequence> arr3=ArrayAdapter.createFromResource(Collaborate.this,R.array.electronics_communication3,android.R.layout.simple_spinner_item);
-                                        ds.setAdapter(arr3);
-                                        break;
-                                    case 4:
-                                        ArrayAdapter<CharSequence> arr4=ArrayAdapter.createFromResource(Collaborate.this,R.array.mechanical,android.R.layout.simple_spinner_item);
-                                        ds.setAdapter(arr4);
-                                }
-                            }
+                        for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                            arrayList.add(dataSnapshot.getKey().toString());
 
-                            @Override
-                            public void onNothingSelected(AdapterView<?> adapterView) {
 
-                            }
-                        });
-                        break;
+                        }
+                        dc.setAdapter(arrayAdapter);
 
-                }
+                   }
+
+                   @Override
+                   public void onCancelled(@NonNull DatabaseError error) {
+
+                   }
+               }) ;
             }
 
             @Override
@@ -293,7 +258,43 @@ public class Collaborate extends AppCompatActivity {
 
             }
         });
-        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+       dc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+           @Override
+           public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+               sectionarraylist=new ArrayList<>();
+               sectionarrayadapter=new ArrayAdapter<>(Collaborate.this,android.R.layout.simple_spinner_dropdown_item,sectionarraylist);
+
+               database.getReference("/"+ dy.getSelectedItem().toString()+"/"+ dc.getSelectedItem().toString()).addValueEventListener(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
+                       for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                           sectionarraylist.add(dataSnapshot.getKey().toString());
+
+
+
+                       }
+                       ds.setAdapter(sectionarrayadapter);
+
+
+                   }
+
+                   @Override
+                   public void onCancelled(@NonNull DatabaseError error) {
+
+                   }
+               });
+
+           }
+
+           @Override
+           public void onNothingSelected(AdapterView<?> adapterView) {
+
+           }
+       });
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 year=dy.getSelectedItem().toString();
@@ -305,10 +306,10 @@ public class Collaborate extends AppCompatActivity {
 
             }
         });
-        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(Collaborate.this, "unsucessful", Toast.LENGTH_LONG).show();
+                Toast.makeText(Collaborate.this, "Cancelled", Toast.LENGTH_LONG).show();
                 dialogInterface.dismiss();
             }
         });
@@ -319,7 +320,7 @@ public class Collaborate extends AppCompatActivity {
 
     private void submission() {
 
-        list.clear();
+
 
         total=harish+day;
 
@@ -329,6 +330,7 @@ public class Collaborate extends AppCompatActivity {
         reference.child(total).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
                 r.setLayoutManager(new LinearLayoutManager(Collaborate.this));
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){
 

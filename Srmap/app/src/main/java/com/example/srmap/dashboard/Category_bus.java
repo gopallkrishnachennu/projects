@@ -41,9 +41,11 @@ public class Category_bus extends AppCompatActivity {
 
     private void busdata() {
 
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                usercategoryList.clear();
                 recyclerView.setLayoutManager(new LinearLayoutManager(Category_bus.this));
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){
 

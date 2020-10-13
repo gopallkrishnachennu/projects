@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 public class Register extends AppCompatActivity {
     Context ct;
     TextView textView;
-    TextInputEditText Name,Lastname,Email,Phone,Password,Cpassword;
+    TextInputEditText Name,Lastname,Email,Phone,Password,Cpassword,id;
     private static final Pattern PASSWORD_PATTERN=Pattern.compile( "^(?=.*[0-9])"
             + "(?=.*[a-z])(?=.*[A-Z])"
             + "(?=.*[@#$%^&+=])"
@@ -49,6 +49,7 @@ public class Register extends AppCompatActivity {
         Phone=findViewById(R.id.phone);
         Password=findViewById(R.id.password);
         Cpassword=findViewById(R.id.confirmpassword);
+        id=findViewById(R.id.userid);
         textView=findViewById(R.id.signin);
 
 
@@ -84,6 +85,17 @@ public class Register extends AppCompatActivity {
         }
         else {
             Lastname.setError(null);
+            return true;
+        }
+    }
+    private boolean validid(){
+        String uid=id.getText().toString().trim();
+        if(uid.isEmpty()){
+            id.setError("Field cant't be empty");
+            return false;
+        }
+        else {
+            id.setError(null);
             return true;
         }
     }
@@ -147,7 +159,7 @@ public class Register extends AppCompatActivity {
             return false;
         }
         else if(!cpassword.equals(password)){
-            Cpassword.setError("Password do not match");
+            Cpassword.setError("Password too week, It must have one Uppercase,one Lowecase,one Numerical,one Symbol char");
             return false;
 
         }
@@ -160,7 +172,7 @@ public class Register extends AppCompatActivity {
     public void signup(View view) {
 
 
-        if(!validName() | !validLastname() | !validEmail() | !validPhone() |!validPassword() |! validcpassword()){
+        if(!validName() | !validLastname() | !validEmail() | !validPhone() |!validPassword() |! validcpassword() |! validid()){
             return;
         }
         else {
@@ -184,9 +196,11 @@ public class Register extends AppCompatActivity {
                                     String email=Email.getText().toString().trim();
                                     String phoneno=Phone.getText().toString().trim();
                                     String password=Password.getText().toString().trim();
-                                    Registerdetails registerdetails=new Registerdetails(name,lastname,email,phoneno,password);
-                                    reference.child(lastname).setValue(registerdetails);
+                                    String userid=id.getText().toString().trim();
+                                    Registerdetails registerdetails=new Registerdetails(name,lastname,email,phoneno,password,userid);
+                                    reference.child(userid).setValue(registerdetails);
                                     startActivity(new Intent(Register.this,Login.class));
+                                    overridePendingTransition(0,0);
                                     finish();
 
                                 }else {

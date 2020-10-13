@@ -13,4 +13,5 @@
     <color name="nexttech">#0077B5</color>
     <color name="time1">#333d48</color>
     <color name="time2">#47505a</color>
+    <color name="transparent">#ffffff00</color>
 </resources>

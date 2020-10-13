@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity  {
 
-    private static int SPLASH_TIME_OUT=4000;
+    private static int SPLASH_TIME_OUT=3000;
     Handler handler;
     Runnable runnable;
     ImageView imageView;
@@ -30,21 +30,34 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
 
         imageView= findViewById(R.id.img);
-        imageView.animate().alpha(4000).setDuration(0);
+        imageView.animate().alpha(3000).setDuration(0);
+        firebaseAuth=FirebaseAuth.getInstance();
 
         handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
 
+                if ( firebaseAuth.getCurrentUser()!=null){
+                    if (firebaseAuth.getCurrentUser().isEmailVerified()) {
+                        Intent intent = new Intent(MainActivity.this, Srm.class);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
+                        finish();
+                    }
+                }else {
                     Intent intent =new Intent(MainActivity.this, Login.class);
                     startActivity(intent);
                     overridePendingTransition(0,0);
                     finish();
 
+                }
+
+
+
 
             }
-        },4000);
+        },3000);
 
 
 

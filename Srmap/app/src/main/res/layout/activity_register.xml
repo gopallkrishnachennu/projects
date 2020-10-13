@@ -9,9 +9,19 @@
     android:layout_margin="10dp"
     tools:context=".Register">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
 
     <TextView
+        android:id="@+id/registertitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sign in to SRM AP"
@@ -21,12 +31,13 @@
         android:gravity="center"
         android:layout_marginTop="50dp"/>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:fitsSystemWindows="true"
         android:id="@+id/framelayout"
+        android:layout_below="@+id/registertitle"
         >
 
         <LinearLayout
@@ -69,6 +80,27 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/lastname"
+                    android:padding="10dp"
+                    android:inputType="textPersonName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="SRM ID"
+                android:textSize="30sp"
+                app:counterMaxLength="20"
+                android:textColor="@color/colorAccent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                app:errorEnabled="true"
+
+                app:startIconDrawable="@drawable/ic_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/userid"
                     android:padding="10dp"
                     android:inputType="textPersonName"
                     android:layout_width="match_parent"
@@ -174,14 +206,16 @@
         </LinearLayout>
 
 
-    </FrameLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_centerInParent="true"
+       android:layout_gravity="center"
         android:layout_below="@+id/framelayout">
 
         <TextView
@@ -204,5 +238,11 @@
             android:textSize="15sp"
             />
     </LinearLayout>
+
+
+
+
+</LinearLayout>
+</ScrollView>
 
 </RelativeLayout>

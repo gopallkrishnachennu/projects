@@ -41,15 +41,17 @@ public class Myadapter_vr extends RecyclerView.Adapter<Myadapter_vr.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         uservrlist=userlist.get(position);
         holder.imageView.setImageResource(uservrlist.getImage());
         holder.imagename.setText(uservrlist.getNames());
+
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int i=holder.getAdapterPosition();
                 Intent intent= new Intent(view.getContext(), webview.class);
-                intent.putExtra("map",uservrlist.getUrl());
+                intent.putExtra("map",userlist.get(i).getUrl());
                 context.startActivity(intent);
 
             }

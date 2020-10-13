@@ -41,7 +41,7 @@ public class Myadapter_prof extends RecyclerView.Adapter<Myadapter_prof.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
       userprof=userprofs.get(position);
 
         Picasso.get().load(userprof.getImages()).into(holder.circleImageView);
@@ -49,19 +49,20 @@ public class Myadapter_prof extends RecyclerView.Adapter<Myadapter_prof.MyViewHo
         holder.designdescription.setText(userprof.getDescription());
         holder.designseconddescription.setText(userprof.getSeconddescription());
         holder.designstamp.setText(userprof.getStamp());
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent=new Intent(view.getContext(),Details.class);
-                intent.putExtra("name",userprof.getName());
-                intent.putExtra("desc",userprof.getDescription());
-                intent.putExtra("sdesc",userprof.getSeconddescription());
-                intent.putExtra("stamp",userprof.getStamp());
-                view.getContext().startActivity(intent);
-
-            }
-        });
+//        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent intent=new Intent(view.getContext(),Details.class);
+//                int position=holder.getAdapterPosition();
+//                intent.putExtra("name",userprofs.get(position).getName());
+//                intent.putExtra("desc",userprofs.get(position).getDescription());
+//                intent.putExtra("sdesc",userprofs.get(position).getSeconddescription());
+//                intent.putExtra("stamp",userprofs.get(position).getStamp());
+//                view.getContext().startActivity(intent);
+//
+//            }
+//        });
 
     }
 

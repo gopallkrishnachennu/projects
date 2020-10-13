@@ -4,16 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <Spinner
+
+        android:dropDownSelector="@drawable/ms__drop_down_shadow"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:id="@+id/y"/>
     <Spinner
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:id="@+id/s"/>
     <Spinner
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:id="@+id/c"/>
 
 </LinearLayout>

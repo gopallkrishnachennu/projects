@@ -1,20 +1,27 @@
 package com.example.srmap.dashboard;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.srmap.R;
+import com.example.srmap.dashboard.Helperclasses.User_imageslider;
 import com.example.srmap.dashboard.Helperclasses.Usercategory;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +37,8 @@ public class Home extends AppCompatActivity {
 
     ChipNavigationBar chipNavigationBar;
     ImageSlider imageSlider;
+     List<SlideModel> slideModels;
+     List<User_imageslider> user_imagesliders;
     //firebase
     LinearLayout lannouncement,lnews,lcampuslife,lcontact,labout,lhostel,lbus,lown;
     TextView announcement,news,campuslife,contact,about;
@@ -218,19 +227,28 @@ public class Home extends AppCompatActivity {
     }
 
     private void imageslide() {
-        final List<SlideModel> slideModels=new ArrayList<>();
-        slideModels.clear();
+       slideModels=new ArrayList<>();
+
+
+
+        user_imagesliders=new ArrayList<>();
+
 
 
 
         FirebaseDatabase.getInstance().getReference("Imgslider").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                slideModels.clear();
+                user_imagesliders.clear();
 
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    final User_imageslider user_imageslider=dataSnapshot.getValue(User_imageslider.class);
+                    user_imagesliders.add(user_imageslider);
 
                     String imgageurl=dataSnapshot.child("imgurl").getValue().toString();
                     String imagetitle=dataSnapshot.child("title").getValue().toString();
+
                     final String intenturl=dataSnapshot.child("go").getValue().toString();
 
                     slideModels.add(new SlideModel(imgageurl,imagetitle,ScaleTypes.FIT));
@@ -239,8 +257,9 @@ public class Home extends AppCompatActivity {
                     imageSlider.setItemClickListener(new ItemClickListener() {
                         @Override
                         public void onItemSelected(int i) {
+
                             Intent intent=new Intent(getApplicationContext(),Primewebview.class);
-                            intent.putExtra("prime",intenturl);
+                            intent.putExtra("prime",user_imagesliders.get(i).getGo());
                             startActivity(intent);
 
                         }
@@ -284,5 +303,57 @@ public class Home extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void itsupport(View view) {
+        Intent intent=new Intent(Home.this,Category_itsupport.class);
+        startActivity(intent);
+
+    }
+
+    public void academic(View view) {
+        Intent intent=new Intent(Home.this,Academic_explore.class);
+        startActivity(intent);
+
+    }
+
+    public void notificationexplore(View view) {
+        Intent intent=new Intent(Home.this,Notification_explore.class);
+        startActivity(intent);
+
+
+    }
+
+    public void course(View view) {
+        Intent intent=new Intent(Home.this,Course_explore.class);
+        startActivity(intent);
+
+    }
+
+    public void homenotify(View view) {
+
+        final AlertDialog.Builder builder=new AlertDialog.Builder(Home.this);
+        View view1= LayoutInflater.from(getApplicationContext()).inflate(R.layout.home_info,null);
+        TextView desc=view1.findViewById(R.id.homeitv);
+        ImageView imageView=view1.findViewById(R.id.homeimg);
+
+        builder.setPositiveButton("Send", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent=new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:srmapassistant@gmail.com"));
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                Toast.makeText(getApplicationContext(),"Cancelled",Toast.LENGTH_LONG).show();
+            }
+        });
+        builder.setView(view1);
+        final AlertDialog alertDialog=builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.show();
     }
 }

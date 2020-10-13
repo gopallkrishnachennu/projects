@@ -25,30 +25,31 @@ public class webview extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
 
+
+
         webView=findViewById(R.id.webviewcontainer);
+
+        webviewvr();
+
+
+
+
+    }
+
+    private void webviewvr() {
 
         String s=getIntent().getStringExtra("map");
 
 
         webView.setWebViewClient(new WebViewClient());
-       webView.loadUrl(s);
+        webView.loadUrl(s);
+
 
         WebSettings webSettings=webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webView.clearCache(true);
 
-        webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-        webView.getSettings().setCacheMode(LOAD_CACHE_ELSE_NETWORK);
-        webView.getSettings().setAppCacheEnabled(true);
-        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        webSettings.setDatabaseEnabled(true);
-        webSettings.setDisplayZoomControls(true);
-        webSettings.setSupportZoom(true);
-        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
-        webSettings.setDomStorageEnabled(true);
-        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
-        webSettings.setUseWideViewPort(true);
-        webSettings.setSavePassword(true);
-        webSettings.setSaveFormData(true);
+
 
     }
 

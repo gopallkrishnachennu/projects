@@ -1,123 +1,37 @@
 <resources>
-    <string name="app_name">Srmap</string>
+    <string name="app_name">SrmAp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="url" />
 
-    // collaborate
 
 
-    -<string-array name="year">
-
-    <item>second_year</item>
-
-    <item>third_year</item>
-
-</string-array>
 
 
-    -<string-array name="course">
-
-    <item>computer_science</item>
-
-    <item>civil</item>
-
-    <item>electrical_electronics</item>
-
-    <item>electronics_communication</item>
-
-    <item>mechanical</item>
-
-</string-array>
 
 
-    -<string-array name="computer_science3">
-
-    <item>cse01</item>
-
-    <item>cse02</item>
-
-    <item>cse03</item>
-
-    <item>cse04</item>
-
-    <item>cse05</item>
-
-    <item>cse06</item>
-
-    <item>cse07</item>
-
-    <item>cse08</item>
-
-    <item>cse09</item>
-
-    <item>cse10</item>
-
-</string-array>
+    <string name="onboardingtext">Loading.....🔄  <br> </br> waiting for your class</string>
+    <string name="privacy">For User privacy we wont collect images \n and These profile details are Stored in End to End ecnryption mode...\n </string>
 
 
-    -<string-array name="computer_science2">
-
-    <item>cse01</item>
-
-    <item>cse02</item>
-
-    <item>cse03</item>
-
-    <item>cse04</item>
-
-    <item>cse05</item>
-
-    <item>cse06</item>
-
-    <item>cse07</item>
-
-    <item>cse08</item>
-
-</string-array>
 
 
-    -<string-array name="electronics_communication3">
 
-    <item>ece01</item>
+    <string name="timetableinfo">If today is *Sunday then it will show \n The next day time table.....️</string>
+    <string name="homeinfo"><b>"𝚠𝚎 𝚊𝚕𝚕 𝚗𝚎𝚎𝚍 𝚙𝚎𝚘𝚙𝚕𝚎 𝚠𝚑𝚘 𝚠𝚒𝚕𝚕 𝚐𝚒𝚟𝚎 𝚞𝚜 𝚏𝚎𝚎𝚍𝚋𝚊𝚌𝚔 .𝚃𝚑𝚊𝚝'𝚜 𝚑𝚘𝚠 𝚠𝚎 𝚒𝚖𝚙𝚛𝚘𝚟𝚎." </b>\n\n 𝚜𝚑𝚊𝚛𝚎 𝚢𝚘𝚞𝚛 𝚘𝚙𝚒𝚗𝚒𝚘𝚗 𝚝𝚑𝚛𝚘𝚞𝚐𝚑 𝚝𝚑𝚎 𝚎𝚖𝚊𝚒𝚕 📧 </string>
 
-    <item>ece02</item>
+    <string name="cpassword">Password too week \n It must have one Uppercase \n  one Lowecase \n one Numerical \n one Symbol char</string>
 
-    <item>ece03</item>
-
-    <item>ece04</item>
-
-</string-array>
-
-
-    -<string-array name="electronics_communication2">
-
-    <item>ece01</item>
-
-    <item>ece02</item>
-
-</string-array>
-
-
-    -<string-array name="civil">
-
-    <item>civil1</item>
-
-</string-array>
-
-
-    -<string-array name="mechanical">
-
-    <item>mechanical1</item>
-
-</string-array>
-
-
-    -<string-array name="electrical_electronics">
-
-    <item>electrical1</item>
-
-</string-array>
+    <style name="spinner_style">
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:dropDownWidth">533dp</item>
+        <item name="android:showDividers">none</item>
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:popupBackground">@color/transparent</item>
+        <item name="android:dropDownHeight">70dp</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="android:dropDownSelector">@android:color/white</item>
+    </style>
 
 
 </resources>

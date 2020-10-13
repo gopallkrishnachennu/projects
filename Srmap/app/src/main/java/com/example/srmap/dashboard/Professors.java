@@ -30,13 +30,14 @@ import java.util.List;
 import java.util.Queue;
 
 public class Professors extends AppCompatActivity {
-    EditText title,desc,stamp,searchView;
+    EditText title,desc,stamp;
     Button button;
     List<Userprof> list;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     private RecyclerView recyclerView;
     private Myadapter_prof  myadapter_prof;
+  //  SearchView searchView;
 
 
 
@@ -48,13 +49,19 @@ public class Professors extends AppCompatActivity {
         //proffessor recycler
         recyclerView=findViewById(R.id.proffrecycler);
         list=new ArrayList<>();
+       // searchView=findViewById(R.id.professorserachview);
 
         firebaseDatabase=FirebaseDatabase.getInstance();
         databaseReference=firebaseDatabase.getReference("Proff");
+
+
+
         load();
 
 
     }
+
+
 
     private void load() {
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -81,6 +88,8 @@ public class Professors extends AppCompatActivity {
 
             }
         });
+
+
 
 
 

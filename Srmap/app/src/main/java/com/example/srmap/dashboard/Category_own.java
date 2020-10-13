@@ -41,9 +41,11 @@ public class Category_own extends AppCompatActivity {
     }
 
     private void own() {
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                usercategoryList.clear();
                 recyclerView.setLayoutManager(new LinearLayoutManager(Category_own.this));
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){
                     Usercategory u=dataSnapshot.getValue(Usercategory.class);

@@ -1,13 +1,17 @@
 package com.example.srmap.dashboard.Helperclasses;
 
 public class Usersrm {
-    private int images;
+    private String images;
     private String title;
     private String maindescription;
     private String seconddescription;
     private String stamp;
 
-    public Usersrm(int images, String title, String maindescription, String seconddescription, String stamp) {
+    public Usersrm (){
+
+    }
+
+    public Usersrm(String images, String title, String maindescription, String seconddescription, String stamp) {
         this.images = images;
         this.title = title;
         this.maindescription = maindescription;
@@ -15,11 +19,11 @@ public class Usersrm {
         this.stamp = stamp;
     }
 
-    public int getImages() {
+    public String getImages() {
         return images;
     }
 
-    public void setImages(int images) {
+    public void setImages(String images) {
         this.images = images;
     }
 

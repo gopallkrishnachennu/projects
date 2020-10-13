@@ -25,6 +25,7 @@
             android:layout_alignParentRight="true"
             />
         <ImageView
+            android:onClick="backbutton"
             android:layout_width="25dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_back_button"
@@ -38,9 +39,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
+        android:layout_below="@id/tollbar"
+
         android:orientation="vertical"
-        android:layout_marginBottom="100dp">
+        android:layout_above="@id/bottom_navigation">
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -65,18 +67,22 @@
                         android:id="@+id/profileimage"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
-                        android:src="@drawable/fogetpassword"
+                        android:src="@drawable/ic_user"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="18dp"
                         app:civ_border_width="2dp"
+                        android:onClick="profilepic"
                         app:civ_border_color="#FF000000"/>
                     <TextView
                         android:id="@+id/profilename"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Gopala Krishna"
-                        android:textSize="24sp"
+                        android:text="SRM User"
+                        android:textStyle="bold"
+                        android:capitalize="words"
+                        android:letterSpacing="0.2"
+                        android:textSize="20sp"
                         android:textColor="#000000"
                         android:textAlignment="center"/>
                     <LinearLayout
@@ -120,17 +126,18 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         >
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/profilefname"
+                            android:id="@+id/firstname"
                             android:inputType="textPersonName"
                             android:padding="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+
                             />
                     </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Last name"
+                        android:hint="Last name / Surname"
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="20dp"
@@ -138,11 +145,32 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         >
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/profilelname"
+                            android:id="@+id/lastname"
                             android:inputType="textPersonName"
                             android:padding="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="SRM ID"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/colorAccent"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        >
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/userid"
+                            android:inputType="textPersonName"
+                            android:padding="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+
                             />
                     </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.textfield.TextInputLayout
@@ -180,55 +208,57 @@
                             android:padding="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+
                             />
                     </com.google.android.material.textfield.TextInputLayout>
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Birthday"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
-                        android:textColor="@color/colorAccent"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        >
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/profilebirthaday"
-                            android:inputType="textPersonName"
-                            android:padding="10dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            />
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Gender"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
-                        android:textColor="@color/colorAccent"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        >
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/profilegender"
-                            android:inputType="textPersonName"
-                            android:padding="10dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            />
-                    </com.google.android.material.textfield.TextInputLayout>
+<!--                    <com.google.android.material.textfield.TextInputLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:hint="Birthday"-->
+<!--                        android:layout_marginEnd="10dp"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:layout_marginTop="20dp"-->
+<!--                        android:textColor="@color/colorAccent"-->
+<!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                        >-->
+<!--                        <com.google.android.material.textfield.TextInputEditText-->
+<!--                            android:id="@+id/profilebirthaday"-->
+<!--                            android:inputType="textPersonName"-->
+<!--                            android:padding="10dp"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            />-->
+<!--                    </com.google.android.material.textfield.TextInputLayout>-->
+<!--                    <com.google.android.material.textfield.TextInputLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:hint="Gender"-->
+<!--                        android:layout_marginEnd="10dp"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:layout_marginTop="20dp"-->
+<!--                        android:textColor="@color/colorAccent"-->
+<!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                        >-->
+<!--                        <com.google.android.material.textfield.TextInputEditText-->
+<!--                            android:id="@+id/profilegender"-->
+<!--                            android:inputType="textPersonName"-->
+<!--                            android:padding="10dp"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            />-->
+<!--                    </com.google.android.material.textfield.TextInputLayout>-->
 
                     <com.google.android.material.button.MaterialButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:id="@+id/loginsignbt"
-                        android:text="Save"
+                        android:text="Update"
                         android:textSize="25dp"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_margin="20dp"
                         android:gravity="center"
+                        android:onClick="updatedialog"
                         />
 
 
@@ -250,12 +280,17 @@
         android:layout_height="wrap_content"
         app:cnb_menuResource="@menu/menu_navigation"
         android:layout_alignParentBottom="true"
-        android:background="@color/dashboard"
+        android:background="?android:attr/windowBackground"
+
+        android:fitsSystemWindows="true"
         app:cnb_unselectedColor="@color/colorPrimary"
         app:cnb_radius="8dp"
         app:cnb_orientationMode="horizontal"
         android:layout_margin="15dp"
         android:elevation="8dp"
-        />
+        app:labelVisibilityMode="labeled"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior">
+
+    </com.ismaeldivita.chipnavigation.ChipNavigationBar>
 
 </RelativeLayout>

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.srmap.R;
 import com.example.srmap.dashboard.Helperclasses.Usersrm;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -41,7 +42,8 @@ public class Myadapter_srm extends RecyclerView.Adapter<Myadapter_srm.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         usersrmdata=usersrmslist.get(position);
-        holder.imageView.setImageResource(usersrmdata.getImages());
+       // holder.imageView.setImageResource(usersrmdata.getImages());
+        Picasso.get().load(usersrmdata.getImages()).into(holder.imageView);
         holder.title.setText(usersrmdata.getTitle());
         holder.desc.setText(usersrmdata.getMaindescription());
         holder.secdesc.setText(usersrmdata.getSeconddescription());

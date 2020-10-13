@@ -114,8 +114,11 @@ public class Login extends AppCompatActivity  implements FirebaseAuth.AuthStateL
                         if ( firebaseAuth.getCurrentUser().isEmailVerified()){
                             Toast.makeText(Login.this,"Dashboard",Toast.LENGTH_LONG).show();
                             Intent intent=new Intent(Login.this, Srm.class);
+
                             String loginemail =username.getText().toString().trim();
                             intent.putExtra("email",loginemail);
+
+
                             overridePendingTransition(0,0);
                             startActivity(intent);
 

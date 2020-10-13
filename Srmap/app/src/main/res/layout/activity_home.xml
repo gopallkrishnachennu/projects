@@ -26,6 +26,7 @@
                     android:layout_margin="5dp"
                     android:orientation="horizontal">
                     <ImageView
+                        android:onClick="homenotify"
                         android:layout_width="20sp"
                         android:layout_height="20sp"
                         android:id="@+id/dashboardtop"
@@ -64,8 +65,8 @@
                                android:layout_height="match_parent"
                                android:layout_margin="10dp"
                                app:iss_auto_cycle="true"
-                               app:iss_delay="0"
-                               app:iss_period="3000"
+                               app:iss_delay="4"
+                               app:iss_period="4000"
                                app:iss_corner_radius="20"
                                app:iss_error_image="@drawable/nopic"
                                />
@@ -100,7 +101,7 @@
                             android:layout_height="match_parent"
                             android:layout_margin="4dp"
                             android:layout_weight="1"
-
+                            android:onClick="itsupport"
                             android:src="@drawable/it"/>
                         <TextView
                             android:layout_width="match_parent"
@@ -123,6 +124,7 @@
                         android:orientation="vertical"
                         android:layout_margin="5dp">
                         <ImageView
+                            android:onClick="academic"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="4dp"
@@ -149,6 +151,7 @@
                         android:orientation="vertical"
                         android:layout_margin="5dp">
                         <ImageView
+                            android:onClick="notificationexplore"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="4dp"
@@ -175,6 +178,7 @@
                         android:orientation="vertical"
                         android:layout_margin="5dp">
                         <ImageView
+                            android:onClick="course"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="4dp"

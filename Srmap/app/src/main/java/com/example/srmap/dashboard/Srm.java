@@ -1,15 +1,18 @@
 package com.example.srmap.dashboard;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,10 +22,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.srmap.R;
+import com.example.srmap.Registerdetails;
 import com.example.srmap.dashboard.Adapters.Myadapter_collaborate;
 import com.example.srmap.dashboard.Adapters.Myadapter_srm;
 import com.example.srmap.dashboard.Helperclasses.User_collaborate;
 import com.example.srmap.dashboard.Helperclasses.Usersrm;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,19 +43,23 @@ import java.util.List;
 
 public class Srm extends AppCompatActivity {
     ImageView imageView;
-    TextView marquee,boarding,classboarding;
+    String emailmatcher;
+    TextView marquee,boarding,classboarding,username;
 
     ChipNavigationBar chipNavigationBar;
     List<Usersrm> list;
     Context ct;
     ListView listView;
+    FirebaseUser firebaseUser;
     List<User_collaborate> user_collaborates;
-    RelativeLayout assignmentcard,modelpapercard,notescard,gpacalculatorcard;
-    LinearLayout  nexttechlab,ennovablab,acmlab,hackathonlab,admin,student,edx,ecloud,parent,lear,cdc,ccc,professor;
+
+    LinearLayout  nexttechlab,ennovablab,acmlab,hackathonlab,admin,student,edx,ecloud,parent,lear,cdc,ccc,professor,assignmentcard,modelpapercard,notescard, gpacalculatorcard;
     // onboarding
     public static final  String SHARED_PRE="d";
     public  static final String TEXT="s";
     String presenttime;
+    public static final String sharedname="gopal";
+    public static final String text="text";
 
 
 
@@ -81,6 +91,7 @@ public class Srm extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    FirebaseAuth firebaseAuth;
     RecyclerView recyclerView;
 
     @Override
@@ -96,6 +107,8 @@ public class Srm extends AppCompatActivity {
         //.......firebase....
         firebaseDatabase=FirebaseDatabase.getInstance();
         databaseReference=firebaseDatabase.getReference();
+        firebaseAuth=FirebaseAuth.getInstance();
+
 
         //..............bottomsheet...........
 
@@ -123,17 +136,96 @@ public class Srm extends AppCompatActivity {
         lear=findViewById(R.id.learnxt);
         cdc=findViewById(R.id.cdcempower);
         ccc=findViewById(R.id.iccc);
+        username=findViewById(R.id.srmusername);
         //.......professor.....
         professor=findViewById(R.id.professor);
-
+        loadusername();
         prof();
         officialsites();
         primelistclick();
         marqueetext();
-        recyclerview();
+      //  recyclerview();
+        databaserecycler();
         navigate();
         more();
         boradingpanel();
+
+
+    }
+
+    private void loadusername() {
+
+        if (firebaseAuth.getCurrentUser()!=null){
+
+            firebaseUser= firebaseAuth.getCurrentUser();
+
+            emailmatcher= firebaseUser.getEmail();
+
+
+        }
+        else{
+            Toast.makeText(Srm.this,"error",Toast.LENGTH_LONG).show();
+        }
+
+
+
+
+        databaseReference=firebaseDatabase.getReference("users");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+
+                    Registerdetails registerdetails=dataSnapshot.getValue(Registerdetails.class);
+
+
+                    if (emailmatcher.equals(registerdetails.getEmail())){
+
+                       String name= registerdetails.getName();
+
+                        username.setText("Hi"+" "+ name+"!");
+
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+    private void databaserecycler() {
+        list=new ArrayList<>();
+        list.clear();
+
+        databaseReference=firebaseDatabase.getReference("SRMrecycler");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    Usersrm usersrm=dataSnapshot.getValue(Usersrm.class);
+                    Log.i("data",usersrm.getTitle());
+                    list.add(usersrm);
+
+                }
+
+                recyclerView.setLayoutManager(new LinearLayoutManager(Srm.this,LinearLayoutManager.HORIZONTAL,false));
+                Myadapter_srm myadapter_srm=new Myadapter_srm(list,Srm.this);
+                recyclerView.setAdapter(myadapter_srm);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
     }
@@ -150,7 +242,7 @@ public class Srm extends AppCompatActivity {
         if(dayofWeek==Calendar.MONDAY)day="monday";
         if(dayofWeek==Calendar.TUESDAY)day="tuesday";
         if(dayofWeek==Calendar.WEDNESDAY)day="wednesday";
-        if(dayofWeek==Calendar.THURSDAY)day="thursady";
+        if(dayofWeek==Calendar.THURSDAY)day="thursday";
         if(dayofWeek==Calendar.FRIDAY)day="friday";
         if(dayofWeek==Calendar.SATURDAY)day="saturday";
 
@@ -170,7 +262,10 @@ public class Srm extends AppCompatActivity {
                     Long emin=Long.valueOf(user_collaborate.getTime().substring(9,11));
 
                     Long pshh= Long.valueOf(presenttime.substring(0,2));
+
                     Long psmm= Long.valueOf(presenttime.substring(3,5));
+
+
                     Long time=pshh*60+psmm;
 
 
@@ -178,30 +273,17 @@ public class Srm extends AppCompatActivity {
                     Long end=ehour*60+emin;
 
                    String ampm=presenttime.substring(8,10);
-                   Log.i("am",ampm);
+                 //  Log.i("am",ampm);
 
-                    if(pshh<9 && ampm.equals("AM" ) ){
+                    Log.i("am",pshh+" "+shour+" "+ehour);
 
-                        classboarding.setText("Gd mng");
 
-                    }
-                    if (pshh>6 && ampm.equals("PM")){
-                        classboarding.setText("Gd eve");
-                    }
 
                    if (time>=start && time<=end){
-                        classboarding.setText(user_collaborate.getCourse()+user_collaborate.getTime());
+                        classboarding.setText(user_collaborate.getCourse());
 
-                    }
-
-
-
-
+                   }
             }
-
-
-
-
             }
 
             @Override
@@ -431,21 +513,24 @@ public class Srm extends AppCompatActivity {
 
 
     }
-//.............trending.........
+ //.............trending.........
 
 
     private void marqueetext() {
 
 
         databaseReference=firebaseDatabase.getReference("Trending").child("Feed");
-        databaseReference.setValue("SRM AP launched for our graduates to provide for educational uses ....Support it and share");
+       //databaseReference.setValue("SRM AP launched for our graduates to provide for educational uses ....Support it and share");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                databaseReference=firebaseDatabase.getReference("Trending").child("Feed");
+
+             // databaseReference=firebaseDatabase.getReference("Trending").child("Feed");
                 String text=snapshot.getValue().toString();
                 marquee.setText(text);
+                marquee.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+                marquee.setSelected(true);
 
             }
 
@@ -455,33 +540,13 @@ public class Srm extends AppCompatActivity {
             }
         });
 
-        marquee.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-        marquee.setSelected(true);
-    }
-
-
-
-
-    private void recyclerview() {
-
-        list=new ArrayList<>();
-        list.add(new Usersrm(R.drawable.boys_hostel,"Srm University","HI im gopala krishna","this is graduate","#Dia"));
-        list.add(new Usersrm(R.drawable.canteen,"Srm University","HI im gopala krishna","this is graduate","#Dia"));
-        list.add(new Usersrm(R.drawable.labs_classrooms,"Srm University","HI im gopala krishna","this is graduate","#Dia"));
-        list.add(new Usersrm(R.drawable.view,"Srm University","HI im gopala krishna","this is graduate","#Dia"));
-        list.add(new Usersrm(R.drawable.girls_hostel,"Srm University","HI im gopala krishna","this is graduate","#Dia"));
-        list.add(new Usersrm(R.drawable.meeting_hall,"Srm University","HI im gopala krishna","this is graduate","#Dia"));
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager( this, LinearLayoutManager.HORIZONTAL, false));
-
-        Myadapter_srm myadapter_srm=new Myadapter_srm(list,this);
-        recyclerView.setAdapter(myadapter_srm);
-
-
-
 
     }
+
+
+
+
+
 
     private void navigate() {
         chipNavigationBar.setItemSelected(2,true);
@@ -515,4 +580,40 @@ public class Srm extends AppCompatActivity {
     }
 
 
+    public void srminfobt(View view) {
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(Srm.this);
+        View view1= LayoutInflater.from(Srm.this).inflate(R.layout.home_info,null);
+
+        TextView desc=view1.findViewById(R.id.homeitv);
+        ImageView imageView=view1.findViewById(R.id.homeimg);
+
+
+        builder.setPositiveButton("Send", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent=new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:srmapassistant@gmail.com"));
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                Toast.makeText(getApplicationContext(),"Cancelled",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        builder.setView(view1);
+        final AlertDialog alertDialog=builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.show();
+
+
+
+
+
+
+
+    }
 }

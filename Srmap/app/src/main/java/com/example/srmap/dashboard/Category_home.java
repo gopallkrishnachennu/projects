@@ -43,9 +43,11 @@ public class Category_home extends AppCompatActivity {
 
     private void loadrecycler() {
 
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                usercategoryList.clear();
                 recyclerView.setLayoutManager(new LinearLayoutManager(Category_home.this));
 
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){

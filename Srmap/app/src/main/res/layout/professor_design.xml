@@ -76,6 +76,7 @@
                     android:text="This is the card view"
                     android:layout_marginStart="10dp"
                     android:textStyle="italic"
+                    android:textIsSelectable="true"
                     android:maxLength="80"
                     android:maxLines="2"
                     />
